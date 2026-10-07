@@ -6,6 +6,7 @@ const initialY = 125;
 let board;
 const clicked = [null, null];
 const invalids = [];
+let sudokuPath = new Path2D();
 
 /**
  * @param {MouseEvent} e 
@@ -63,22 +64,8 @@ function drawBoard() {
     }
     ctx.beginPath();
     ctx.lineWidth = 5;
-    ctx.moveTo(initialX + 3 * cellSize, initialY);
-    ctx.lineTo(initialX + 3 * cellSize, initialY + cellSize * rowAmount);
-    if(board.length === 9) {
-        ctx.moveTo(initialX + 6 * cellSize, initialY);
-        ctx.lineTo(initialX + 6 * cellSize, initialY + cellSize * rowAmount);
-        ctx.moveTo(initialX, initialY + 3 * cellSize);
-        ctx.lineTo(initialX + cellSize * rowAmount, initialY + 3 * cellSize);
-        ctx.moveTo(initialX, initialY + 6 * cellSize);
-        ctx.lineTo(initialX + cellSize * rowAmount, initialY + 6 * cellSize);
-    } else {
-        ctx.moveTo(initialX, initialY + 2 * cellSize);
-        ctx.lineTo(initialX + cellSize * rowAmount, initialY + 2 * cellSize);
-        ctx.moveTo(initialX, initialY + 4 * cellSize);
-        ctx.lineTo(initialX + cellSize * rowAmount, initialY + 4 * cellSize);
-    }
-    ctx.stroke();
+
+    ctx.stroke(sudokuPath);
 
     if(clicked[0] !== null) {
         ctx.globalAlpha = 0.4;
@@ -113,6 +100,8 @@ function drawBoard() {
 
 function initSudoku(boardStr) {
     console.log(boardStr, boardStr.length)
+    sudokuPath.moveTo(initialX + 3 * cellSize, initialY);
+    sudokuPath.lineTo(initialX + 3 * cellSize, initialY + cellSize * rowAmount);
     if(boardStr.length === 81) {
         rowAmount = 9;
         cellSize = 450 / rowAmount;
@@ -128,6 +117,14 @@ function initSudoku(boardStr) {
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0]
         ]
+
+        sudokuPath.moveTo(initialX + 6 * cellSize, initialY);
+        sudokuPath.lineTo(initialX + 6 * cellSize, initialY + cellSize * rowAmount);
+        sudokuPath.moveTo(initialX, initialY + 3 * cellSize);
+        sudokuPath.lineTo(initialX + cellSize * rowAmount, initialY + 3 * cellSize);
+        sudokuPath.moveTo(initialX, initialY + 6 * cellSize);
+        sudokuPath.lineTo(initialX + cellSize * rowAmount, initialY + 6 * cellSize);
+        
     } else {
         rowAmount = 6;
         cellSize = 450 / rowAmount;
@@ -140,7 +137,12 @@ function initSudoku(boardStr) {
             [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
         ]
+        sudokuPath.moveTo(initialX, initialY + 2 * cellSize);
+        sudokuPath.lineTo(initialX + cellSize * rowAmount, initialY + 2 * cellSize);
+        sudokuPath.moveTo(initialX, initialY + 4 * cellSize);
+        sudokuPath.lineTo(initialX + cellSize * rowAmount, initialY + 4 * cellSize);
     }
+    sudokuPath.closePath();
 
 
     const puzzle = boardStr.split("");

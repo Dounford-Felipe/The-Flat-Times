@@ -27,7 +27,7 @@ const contentJson = {
     "date": "Octuber 9, 2026",
     "pages": [
         {
-            format: "fullpage",
+            "format": "fullpage",
             "type": "mainPage",
             "headline": "Big Release!",
             "text": [
@@ -38,124 +38,197 @@ const contentJson = {
             "image": "readers"
         },
         {
-            format: "fullpage",
+            "format": "fullpage",
             "type": "featuredArea",
             "headline": "EverBrook Bank",
             "text": [
-                {text: "Everbrook Bank, also known as EB, is the hot spot in the Flatland", x: 600, y: 0},
-                {text: "Flatters of all ages get together to talk and trade there", x: 600, y: 200},
-                {text: "The bank main porpose is to bank and withdraw items, to list and buy items from the Global Market", x: 600, y: 400}
-            ],
-            images: [
-                {name: "featuredArea", x: 275, y: 350}
-            ]
-        },
-        {
-            format: "fullpage",
-            "type": "puzzle",
-            game: "sudoku",
-            puzzle: "017006900356194020089007106065000273872563419043000685521000000798005300634000590",
-            puzzle2: "804071090976030000501960000307495000",
-            "headline": "Sudoku",
-        },
-        {
-            format: "half",
-            sections: [
                 {
-                    "type": "ad",
-                    headline: "",
-                    images: [
-                        {name:"ad", x: 288, y: 320, width: Infinity, height: 640, clip: true}
-                    ],
-                    "text": [
-                        {text: "Everbrook Bank, also known as EB, is the hot spot in the Flatland", x: 0, y: 0},
-                    ]
+                    "text": "Everbrook Bank, also known as EB, is the hot spot in the Flatland",
+                    "x": 600,
+                    "y": 0
                 },
                 {
-                    "type": "joke",
-                    headline: "jokes",
-                    images: [],
-                    text: [
-                        {text:"I saw someone killing Silkfang a few days ago. I reported him for bug abuse.", x: 0, y: 100}
-                    ]
+                    "text": "Flatters of all ages get together to talk and trade there",
+                    "x": 600,
+                    "y": 200
+                },
+                {
+                    "text": "The bank main porpose is to bank and withdraw items, to list and buy items from the Global Market",
+                    "x": 600,
+                    "y": 400
+                }
+            ],
+            "images": [
+                {
+                    "name": "featuredArea",
+                    "x": 275,
+                    "y": 350
                 }
             ]
         },
         {
-            format: "fullpage",
-            "type": "poetry",
-            headline: "FlatLand",
-            text: [
-                {text: `Awakened alone, in a land that was Flat.
-I came across a crying lady, who had just lost her cat.
-She would give me ten coins, if I could bring the pet home.
-Where this feline was, I did not know.`, x: 50, y: 80},
-
-                {text: `Walking due North, I passed by a large home with guards garrisoned outside.
-They were armed with bronze swords, standing by the words, "Mayor's House", on a sign.
-As I continued through town, I thought to myself, "this man...must be rich!"
-Then I saw in the distance, a place where people could stand and fish.`, x: 50, y: 230},
-
-                {text: `I met a guy named Ned, he loved the beach and he owned a boat.
-For 25 coins, I could float to a jungle island, but I was too broke.
-That's when I found the cat, watching some men fish for sardines.
-Here kitty, kitty, kitty, but she would not come to me.`, x: 50, y: 410},
-
-                {text: `Fresh out of ideas, South bound, I retraced my steps.
-I found a farm with a cow and a pail, so I beat the cow to death
-Don't ask me how it happened, but there was milk in my bucket.
-I took it back to the kitty, and the kitty loved it!`, x: 650, y: 50},
-
-                {text: `Back to her home, back to her owner, the cat followed me back.
-The crying lady stopped crying, thanking me for the task.
-As promised by her, she gave me my ten coins in pay.
-What I did with those ten coins, is a story for another day!`, x: 650, y: 180},
-
-                {text: `Ever since then, more people have came and joined the fun.
-At first they walk slowly, but then they learn how to run.
-Trapped together in this world, we can quest and we can chat.
-And that's what happened when I awoke in a world that was Flat.`, x: 650, y: 310},
-                {text:"-From taoteching", x: 950, y: 400}
-            ]
-            
+            "format": "fullpage",
+            "type": "puzzle",
+            "game": "sudoku",
+            "puzzle": "017006900356194020089007106065000273872563419043000685521000000798005300634000590",
+            "puzzle2": "804071090976030000501960000307495000",
+            "headline": "Sudoku"
         },
         {
-            format: "half",
-            sections: [
+            "format": "fullpage",
+            "type": "poetry",
+            "headline": "The day the world became Flat",
+            "text": [
+                {
+                    "text": "Awakened alone, in a land that was Flat.\nI came across a crying lady, who had just lost her cat.\nShe would give me ten coins, if I could bring the pet home.\nWhere this feline was, I did not know.",
+                    "x": 50,
+                    "y": 130
+                },
+                {
+                    "text": "Walking due North, I passed by a large home with guards garrisoned outside.\nThey were armed with bronze swords, standing by the words, \"Mayor's House\", on a sign.\nAs I continued through town, I thought to myself, \"this man...must be rich!\"\nThen I saw in the distance, a place where people could stand and fish.",
+                    "x": 50,
+                    "y": 275
+                },
+                {
+                    "text": "I met a guy named Ned, he loved the beach and he owned a boat.\nFor 25 coins, I could float to a jungle island, but I was too broke.\nThat's when I found the cat, watching some men fish for sardines.\nHere kitty, kitty, kitty, but she would not come to me.",
+                    "x": 50,
+                    "y": 450
+                },
+                {
+                    "text": "Fresh out of ideas, South bound, I retraced my steps.\nI found a farm with a cow and a pail, so I beat the cow to death\nDon't ask me how it happened, but there was milk in my bucket.\nI took it back to the kitty, and the kitty loved it!",
+                    "x": 650,
+                    "y": 50,
+                    "width": 450
+                },
+                {
+                    "text": "Back to her home, back to her owner, the cat followed me back.\nThe crying lady stopped crying, thanking me for the task.\nAs promised by her, she gave me my ten coins in pay.\nWhat I did with those ten coins, is a story for another day!",
+                    "x": 650,
+                    "y": 190,
+                    "width": 460
+                },
+                {
+                    "text": "Ever since then, more people have came and joined the fun.\nAt first they walk slowly, but then they learn how to run.\nTrapped together in this world, we can quest and we can chat.\nAnd that's what happened when I awoke in a world that was Flat.",
+                    "x": 650,
+                    "y": 340,
+                    "width": 450
+                },
+                {
+                    "text": "-From taoteching",
+                    "x": 950,
+                    "y": 430
+                }
+            ]
+        },
+        {
+            "format": "half",
+            "sections": [
                 {
                     "type": "comic",
-                    headline: "Comics",
-                    images: [
-                        {name: "comic",x:290,y:350, width: 520}
+                    "headline": "Comics",
+                    "images": [
+                        {
+                            "name": "comic",
+                            "x": 290,
+                            "y": 350,
+                            "width": 520
+                        }
                     ],
-                    text:[
-                        {text: "-By Orange", x: 210, y: 370, font: 15}
+                    "text": [
+                        {
+                            "text": "-By Orange",
+                            "x": 210,
+                            "y": 370,
+                            "font": 15
+                        }
                     ]
                 },
                 {
                     "type": "art",
-                    headline: "Fan Art",
-                    images: [
-                        {name: "fanart", x:290,y:350, width: 520}
+                    "headline": "Fan Art",
+                    "images": [
+                        {
+                            "name": "fanart",
+                            "x": 290,
+                            "y": 350,
+                            "width": 520
+                        }
                     ],
-                    text:[
-                        {text: "-By Sunlit", x: 215, y: 405, font: 15}
+                    "text": [
+                        {
+                            "text": "-By Sunlit",
+                            "x": 215,
+                            "y": 405,
+                            "font": 15
+                        }
                     ]
                 }
             ]
         },
         {
-            format: "fullpage",
-            "type": "help",
-            headline: "We Need Your help!",
-            text: [
-                {text: "Do you have good ideas to write? We are looking for writers for the Flat Times. If you have an original joke, riddle or poem for us, please send it using the official discord server ticket system or by sending directly to one of our editors.", x: 30, y: 130},
-                {text: "Remember to inclued the answer if you are sending a riddle.", x: 30, y: 200},
-                {text: "Make sure you are the original author of the creation before submitting", x: 30, y: 250},
+            "format": "half",
+            "sections": [
+                {
+                    "type": "ad",
+                    "images": [
+                        {
+                            "name": "ad",
+                            "x": 288,
+                            "y": 320,
+                            "width": null,
+                            "height": 640,
+                            "clip": true
+                        }
+                    ]
+                },
+                {
+                    "type": "help",
+                    "headline": "We Need Your help!",
+                    "text": [
+                        {
+                            "text": "The Flat Times is looking for fresh ink! Do you have stories to tell, witty riddles, or original jokes to share with the flatland?",
+                            "x": 0,
+                            "y": 170
+                        },
+                        {
+                            "text": "SUBMISSION GUIDELINES:\n• All content must be original.\n• Include the answer when submitting riddles.\n• Accepted submissions will be featured in upcoming editions!",
+                            "x": 0,
+                            "y": 320
+                        },
+                        {
+                            "text": "Send your drafts via Discord ticket or directly to our Chief Editor:",
+                            "x": 0,
+                            "y": 450
+                        },
+                        {
+                            "text": "@dounford",
+                            "x": -100,
+                            "y": 505
+                        },
+                        {
+                            "text": "discord.gg/KHz4sEUse3",
+                            "x": 120,
+                            "y": 505
+                        }
+                    ],
+                    "images": [
+                        {
+                            "name": "discord",
+                            "x": 80,
+                            "y": 600,
+                            "width": 50
+                        }
+                    ]
+                }
             ]
-        },
+        }
     ],
-    images: ["readers", "featuredArea", "ad", "comic", "fanart"]
+    "images": [
+        "readers",
+        "featuredArea",
+        "ad",
+        "comic",
+        "fanart"
+    ]
 }
 
 let currentPage = 0;
@@ -163,7 +236,7 @@ let currentGame = null;
 
 const games = {
     sudoku(page) {
-        drawText(ctx, "Fill each 2x3 set with a different pet", {
+        drawText(ctx, "Fill each 3x3 set with a different pet", {
             x: 50,
             y: 100,
             width: 200,
@@ -177,19 +250,20 @@ const games = {
             height: 200,
             fontSize: 24,
         });
-        drawText(ctx, "Each pet can only appear on the board 6 times", {
+        drawText(ctx, "Each pet can only appear on the board 9 times", {
             x: 300,
             y: 150,
             width: 200,
             height: 200,
             fontSize: 24,
         });
-        drawText(ctx, "Have Fun", {
+        drawText(ctx, "Have Fun!", {
             x: 50,
             y: 400,
             width: 200,
             height: 200,
             fontSize: 24,
+            fontWeight: 700
         });
 
         const pet = (contentJson.issue % 9) + 1;
@@ -224,11 +298,15 @@ async function init() {
     for (let i = 1; i < 10; i++) {
         imagesArr.push(["sudokuPet" + i, `./images/sudokuPet${i}.png`])
     }
+
+    imagesArr.push(["discord", `./images/discord.png`]);
     
     await loadImages(imagesArr);
     
     renderMainPage();
-    switchPage(6)
+    switchPage(2)
+    
+    canvas.focus();
 }
 
 function switchPage(direction) {
@@ -236,6 +314,7 @@ function switchPage(direction) {
     const pageCount = contentJson.pages.length - 1;
     if(newPage > pageCount || newPage < 0) return;
     currentPage = newPage;
+    currentGame = null;
     ctx.clearRect(0,0, canvas.width, canvas.height);
     if(newPage === 0) {
         renderMainPage();
@@ -290,16 +369,32 @@ function renderMainPage() {
 
     drawImageHelper(images[contentJson.pages[0].image], 575, 400, 400, 400);
 
+    ctx.beginPath()
     ctx.fillStyle = "#656565";
     ctx.fillText("Sections", 935, 250);
     ctx.moveTo(900, 260);
     ctx.lineTo(1125, 260);
 
-    for(let i = 1; i < contentJson.pages.length; i++) {
-        const sectionName = sectionsMap[contentJson.pages[i].type] || "Extras";
-        ctx.fillText(sectionName, 1000, 250 + (30 * i));
-        ctx.moveTo(900, 260 + (30 * i));
-        ctx.lineTo(1125, 260 + (30 * i));
+    let sections = 1;
+    for(let page = 1; page < contentJson.pages.length; page++) {
+        if(contentJson.pages[page].format === "fullpage") {
+            const sectionName = sectionsMap[contentJson.pages[page].type] || "Extras";
+            ctx.fillText(sectionName, 1000, 250 + (30 * sections));
+            ctx.moveTo(900, 260 + (30 * sections));
+            ctx.lineTo(1125, 260 + (30 * sections));
+            sections++;
+        } else {
+            const section1Name = sectionsMap[contentJson.pages[page].sections[0].type] || "Extras";
+            const section2Name = sectionsMap[contentJson.pages[page].sections[1].type] || "Extras";
+            ctx.fillText(section1Name, 1000, 250 + (30 * sections));
+            ctx.moveTo(900, 260 + (30 * sections));
+            ctx.lineTo(1125, 260 + (30 * sections));
+            sections++;
+            ctx.fillText(section2Name, 1000, 250 + (30 * sections));
+            ctx.moveTo(900, 260 + (30 * sections));
+            ctx.lineTo(1125, 260 + (30 * sections));
+            sections++;
+        }
     }
     ctx.stroke();
 }
@@ -311,6 +406,7 @@ function renderPage() {
     ctx.strokeStyle = "#000000";
     //Border Width
     ctx.lineWidth = 2;
+    
 
     //Page Borders
     ctx.fill(bgPath);
@@ -330,17 +426,18 @@ function renderPage() {
     ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
     ctx.beginPath();
     ctx.moveTo(25, 20);
-    ctx.lineTo(500, 20);
+    ctx.lineTo(530, 20);
     ctx.moveTo(25, 50);
-    ctx.lineTo(500, 50);
-    ctx.moveTo(650, 20);
+    ctx.lineTo(530, 50);
+    ctx.moveTo(620, 20);
     ctx.lineTo(1125, 20);
-    ctx.moveTo(650, 50);
+    ctx.moveTo(620, 50);
     ctx.lineTo(1125, 50);
     ctx.stroke();
 
     //Shadow
     const shadowWidth = 30;
+    
     ctx.save();
     ctx.clip(bgPath);
 
@@ -385,9 +482,9 @@ function drawContentFull() {
     ctx.font = "48px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
     if(page.headline) {
         drawText(ctx, page.headline.toLocaleUpperCase(), {
-            x: 25,
+            x: 0,
             y: 75,
-            width: 475,
+            width: 550,
             fontSize: 48,
         });
     }
@@ -398,8 +495,6 @@ function drawContentFull() {
         currentGame = page.game;
         games[page.game](page);
         return;
-    } else {
-        currentGame = null;
     }
     
     if(page.images) {
@@ -439,7 +534,6 @@ function drawContent() {
 
         if(section.text) {
             section.text.forEach(text => {
-                console.log(text)
                 drawText(ctx, text.text, {
                     x: initialX + text.x,
                     y: text.y,
@@ -478,9 +572,9 @@ canvas.addEventListener("click", /** @param {MouseEvent} e */ (e) => {
         clickHandler[currentGame](e);
     }
     if(e.clientX > 0 && e.clientX < 50) {
-        switchPage(-1)
+        switchPage(-1);
     } else if (e.clientX < 1150 && e.clientX > 1100) {
-        switchPage(1)
+        switchPage(1);
         
     }
 })
@@ -488,11 +582,11 @@ canvas.addEventListener("keydown", /** @param {KeyboardEvent} e */ (e) => {
     if(currentGame) {
         keyHandler[currentGame](e);
     }
-    console.log(e.key)
+
     if(e.key === "ArrowLeft") {
-        switchPage(-1)
+        switchPage(-1);
     } else if (e.key === "ArrowRight") {
-        switchPage(1)
+        switchPage(1);
     }
 })
 
