@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoCode</title>
+    <style>
+        span {
+            word-wrap: anywhere;
+        }
+        div {
+            max-width: 640px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Message To Shuffle</h1>
+    <textarea name="" id="message" style="text-transform:uppercase" cols="80" rows="10"></textarea>
+    <br>
+    <div>
+        <span style="font-weight: 900;">Message:</span>
+        <span id="shuffledMessage"></span>
+    </div>
+    <span>
+        <span style="font-weight: 900;">Alphabet:</span>
+        <span id="shuffledAlphabet"></span>
+    </span>
+    <script src="crypto.js"></script>
+</body>
+</html>

@@ -99,13 +99,14 @@ async function loadIssue(issue) {
 async function init() {
     const imagesArr = [];
     for (let i = 1; i < 10; i++) {
-        imagesArr.push(["sudokuPet" + i, `./images/sudokuPet${i}.png`])
+        imagesArr.push(["sudokuPet" + i, `./src/images/global/sudokuPet${i}.png`])
     }
     
-    imagesArr.push(["discord", `./images/discord.png`]);
+    imagesArr.push(["discord", `./src/images/global/discord.png`]);
     
     await loadImages(imagesArr);
     await switchIssue(lastIssue);
+    //switchPage(4)
 }
 
 async function switchIssue(issue) {
@@ -114,7 +115,7 @@ async function switchIssue(issue) {
         await loadIssue(issue);
     }
     currentIssue = issue;
-    const imagesArr = issues[currentIssue].images.map(imagePath => [imagePath, `./images/issue${issues[currentIssue].issue}_${imagePath}.png`]);
+    const imagesArr = issues[currentIssue].images.map(imagePath => [`${issue}_${imagePath}`, `./src/images/${issue}/${imagePath}.png`]);
     await loadImages(imagesArr);
     renderMainPage();
     canvas.focus();
@@ -178,7 +179,7 @@ function renderMainPage() {
         });
     }
 
-    drawImageHelper(images[issues[currentIssue].pages[0].image], 575, 400, 400, 400);
+    drawImageHelper(images[currentIssue + "_cover"], 575, 400, 400, 400);
 
     ctx.beginPath()
     ctx.fillStyle = "#656565";
@@ -310,7 +311,8 @@ function drawContentFull() {
     
     if(page.images) {
         page.images.forEach(image => {
-            drawImageHelper(images[image.name], image.x, image.y, image.width || 450, image.height || 450)
+            const imagePath = image?.global ? images[image.name] : images[`${currentIssue}_${image.name}`];
+            drawImageHelper(imagePath, image.x, image.y, image.width || 450, image.height || 450);
         })
     }
 
@@ -322,7 +324,7 @@ function drawContentFull() {
                 width: text.width || 500,
                 height: text.height || 200,
                 fontSize: text.font || 18,
-                align: "left"
+                align: "justify"
             });
         })
     }
@@ -339,7 +341,8 @@ function drawContent() {
         const section = page.sections[i];
         if(section.images) {
             section.images.forEach(image => {
-                drawImageHelper(images[image.name], initialX + image.x, image.y, image.width || 450, image.height || 450, image.clip || false)
+                const imagePath = image?.global ? images[image.name] : images[`${currentIssue}_${image.name}`];
+                drawImageHelper(imagePath, initialX + image.x, image.y, image.width || 450, image.height || 450, image.clip || false)
             })
         }
 
@@ -351,6 +354,7 @@ function drawContent() {
                     width: text.width || 575,
                     height: text.height || 200,
                     fontSize: text.font || 24,
+                    align: "justify"
                 });
             })
         }

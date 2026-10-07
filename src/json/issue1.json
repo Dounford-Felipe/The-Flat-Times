@@ -1,17 +1,16 @@
 {
     "issue": 1,
-    "date": "Octuber 9, 2026",
+    "date": "October 7, 2026",
     "pages": [
         {
             "format": "fullpage",
             "type": "mainPage",
-            "headline": "Big Release!",
+            "headline": "Flat Times Officially Launches!",
             "text": [
                 "This is the first edition",
                 "We will have more text",
                 "Stay tuned"
-            ],
-            "image": "readers"
+            ]
         },
         {
             "format": "fullpage",
@@ -112,7 +111,7 @@
                     "text": [
                         {
                             "text": "-By Orange",
-                            "x": 210,
+                            "x": 450,
                             "y": 370,
                             "font": 15
                         }
@@ -132,7 +131,7 @@
                     "text": [
                         {
                             "text": "-By Sunlit",
-                            "x": 215,
+                            "x": 465,
                             "y": 405,
                             "font": 15
                         }
@@ -150,7 +149,7 @@
                             "name": "ad",
                             "x": 288,
                             "y": 320,
-                            "width": null,
+                            "width": "Infinity",
                             "height": 640,
                             "clip": true
                         }
@@ -162,27 +161,30 @@
                     "text": [
                         {
                             "text": "The Flat Times is looking for fresh ink! Do you have stories to tell, witty riddles, or original jokes to share with the flatland?",
-                            "x": 0,
-                            "y": 170
+                            "x": 40,
+                            "y": 170,
+                            "width": 525
                         },
                         {
                             "text": "SUBMISSION GUIDELINES:\n• All content must be original.\n• Include the answer when submitting riddles.\n• Accepted submissions will be featured in upcoming editions!",
-                            "x": 0,
-                            "y": 320
+                            "x": 40,
+                            "y": 320,
+                            "width": 525
                         },
                         {
                             "text": "Send your drafts via Discord ticket or directly to our Chief Editor:",
-                            "x": 0,
-                            "y": 450
+                            "x": 40,
+                            "y": 450,
+                            "width": 525
                         },
                         {
                             "text": "@dounford",
-                            "x": -100,
+                            "x": 130,
                             "y": 505
                         },
                         {
                             "text": "discord.gg/KHz4sEUse3",
-                            "x": 120,
+                            "x": 270,
                             "y": 505
                         }
                     ],
@@ -191,7 +193,8 @@
                             "name": "discord",
                             "x": 80,
                             "y": 600,
-                            "width": 50
+                            "width": 50,
+                            "global": true
                         }
                     ]
                 }
@@ -199,7 +202,7 @@
         }
     ],
     "images": [
-        "readers",
+        "cover",
         "featuredArea",
         "ad",
         "comic",
