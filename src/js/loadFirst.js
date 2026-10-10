@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 const images = {};
 const clickHandler = {};
 const keyHandler = {};
+const Games = {};
 const meio = canvas.width/2;
 const recuo = 60;
 const bgPath = new Path2D();

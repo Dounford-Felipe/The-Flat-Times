@@ -1,4 +1,3 @@
-import { drawText } from "https://esm.sh/canvas-txt";
 import lastIssue from '../json/issues.json' with { type: 'json' };
 
 const sectionsMap = {
@@ -22,51 +21,11 @@ const sectionsMap = {
     extra: "Extras"
 }
 
-const issues = {};
+window.issues = {};
 
-let currentIssue = lastIssue;
+window.currentIssue = lastIssue;
 let currentPage = 0;
 let currentGame = null;
-
-const games = {
-    sudoku(page) {
-        drawText(ctx, "Fill each 3x3 set with a different pet", {
-            x: 50,
-            y: 100,
-            width: 200,
-            height: 200,
-            fontSize: 24,
-        });
-        drawText(ctx, "Fill cells until the board is complete. Pets in sets, rows or columns cannot repeat", {
-            x: 50,
-            y: 250,
-            width: 200,
-            height: 200,
-            fontSize: 24,
-        });
-        drawText(ctx, "Each pet can only appear on the board 9 times", {
-            x: 300,
-            y: 150,
-            width: 200,
-            height: 200,
-            fontSize: 24,
-        });
-        drawText(ctx, "Have Fun!", {
-            x: 50,
-            y: 400,
-            width: 200,
-            height: 200,
-            fontSize: 24,
-            fontWeight: 700
-        });
-
-        const pet = (issues[currentIssue].issue % 9) + 1;
-
-        drawImageHelper(images["sudokuPet" + pet], 400, 450, 100, 100);
-
-        initSudoku(page.puzzle)
-    }
-}
 
 async function loadImages(imagesArr) {
     const loadPromises = imagesArr.map(imagePath => {
@@ -106,7 +65,7 @@ async function init() {
     
     await loadImages(imagesArr);
     await switchIssue(lastIssue);
-    //switchPage(4)
+    switchPage(2)
 }
 
 async function switchIssue(issue) {
@@ -119,6 +78,11 @@ async function switchIssue(issue) {
     await loadImages(imagesArr);
     renderMainPage();
     canvas.focus();
+    issues[issue].pages.forEach(page => {
+        if(page?.type === "puzzle") {
+            Games[page.game].init(page);
+        }
+    })
 }
 
 function switchPage(direction) {
@@ -325,7 +289,7 @@ function drawContentFull() {
 
     if(page.type === "puzzle") {
         currentGame = page.game;
-        games[page.game](page);
+        Games[page.game].render();
         return;
     }
     

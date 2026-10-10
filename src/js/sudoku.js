@@ -1,156 +1,219 @@
-let rowAmount;
-let cellSize;
-let halfCell;
-const initialX = 650;
-const initialY = 125;
-let board;
-const clicked = [null, null];
-const invalids = [];
-let sudokuPath = new Path2D();
-
-/**
- * @param {MouseEvent} e 
- */
-clickHandler.sudoku = function(e) {
-    if(e.clientX < initialX || e.clientX > initialX + cellSize * rowAmount || e.clientY < initialY || e.clientY > initialY + cellSize * rowAmount) {
-        clicked[0] = null;
-        clicked[1] = null;
-    } else {
-        clicked[0] = Math.floor((e.clientX - initialX) / cellSize);
-        clicked[1] = Math.floor((e.clientY - initialY) / cellSize);
-    }
-    drawBoard();
-}
-/**
- * @param {KeyboardEvent} e 
- */
-keyHandler.sudoku = function(e)  {
-    console.log(e)
-    if(clicked[0] === null) return;
-    if(e.keyCode > 48 && e.keyCode < 58) {
-        const num = e.keyCode - 48;
-        board[clicked[0]][clicked[1]] = num;
-        checkInvalid(clicked[0], clicked[1]);
-        drawBoard();
-    } else if (e.key === "0" || e.key === "Backspace") {
-        board[clicked[0]][clicked[1]] = 0;
-        checkInvalid(clicked[0], clicked[1]);
-        drawBoard();
-    }
-}
-
-function checkInvalid(x, y) {
-    const num = board[x][y];
-    if(num === 0) return;
-    for(let i = 0; i < 6; i++) {
-
-    }
-}
-
-function drawBoard() {
-    ctx.fillStyle = "white";
-    ctx.fillRect(initialX, initialY, cellSize * rowAmount, cellSize * rowAmount)
-    ctx.fillStyle = "black";
-    ctx.globalAlpha = 1;
-
-    for(let i = 1; i < rowAmount; i++) {
-        ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.moveTo(initialX, initialY + i * cellSize);
-        ctx.lineTo(initialX + cellSize * rowAmount, initialY + i * cellSize)
-        ctx.moveTo(initialX + i * cellSize, initialY);
-        ctx.lineTo(initialX + i * cellSize, initialY + cellSize * rowAmount)
-        ctx.stroke();
-    }
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-
-    ctx.stroke(sudokuPath);
-
-    if(clicked[0] !== null) {
-        ctx.globalAlpha = 0.4;
-        ctx.fillStyle = "gray";
-        for(let i = 0; i < rowAmount; i++) {
-            ctx.rect(initialX + i * cellSize, initialY + clicked[1] * cellSize, cellSize, cellSize);
-            ctx.rect(initialX + clicked[0] * cellSize, initialY + i * cellSize, cellSize, cellSize);
-        }
-        ctx.fill();
-        ctx.beginPath();
-        ctx.globalAlpha = 0.5;
-        ctx.rect(initialX + clicked[0] * cellSize, initialY + clicked[1] * cellSize, cellSize, cellSize);
-        ctx.fill();
-        ctx.globalAlpha = 1;
-    }
-    ctx.fillStyle = "red";
-    invalids.forEach(invalid => {
-        ctx.beginPath();
-        ctx.globalAlpha = 0.4;
-        ctx.rect(initialX + invalid[0] * cellSize, initialY + invalid[1] * cellSize, cellSize, cellSize);
-        ctx.fill();
-    })
-    ctx.globalAlpha = 1;
-
-    for(let x = 0; x < rowAmount; x++) {
-        for(let y = 0; y < rowAmount; y++) {
-            if(board[x][y] === 0) continue;
-            drawImageHelper(images["sudokuPet" + board[x][y]], initialX + x * cellSize + halfCell, initialY + y * cellSize + halfCell, cellSize * 0.8)
-        }
-    }
-}
-
-function initSudoku(boardStr) {
-    console.log(boardStr, boardStr.length)
-    sudokuPath.moveTo(initialX + 3 * cellSize, initialY);
-    sudokuPath.lineTo(initialX + 3 * cellSize, initialY + cellSize * rowAmount);
-    if(boardStr.length === 81) {
-        rowAmount = 9;
-        cellSize = 450 / rowAmount;
-        halfCell = cellSize / 2;
-        board = [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0]
-        ]
-
-        sudokuPath.moveTo(initialX + 6 * cellSize, initialY);
-        sudokuPath.lineTo(initialX + 6 * cellSize, initialY + cellSize * rowAmount);
-        sudokuPath.moveTo(initialX, initialY + 3 * cellSize);
-        sudokuPath.lineTo(initialX + cellSize * rowAmount, initialY + 3 * cellSize);
-        sudokuPath.moveTo(initialX, initialY + 6 * cellSize);
-        sudokuPath.lineTo(initialX + cellSize * rowAmount, initialY + 6 * cellSize);
+class Sudoku {
+    constructor() {
+        this.initialX = 650;
+        this.initialY = 125;
+        this.type = 1;
+        this.rowAmount;
+        this.cellSize;
+        this.halfCell;
+        this.board;
+        this.clicked = [null, null];
+        this.invalids = [];
         
-    } else {
-        rowAmount = 6;
-        cellSize = 450 / rowAmount;
-        halfCell = cellSize / 2;
-        board = [
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-        ]
-        sudokuPath.moveTo(initialX, initialY + 2 * cellSize);
-        sudokuPath.lineTo(initialX + cellSize * rowAmount, initialY + 2 * cellSize);
-        sudokuPath.moveTo(initialX, initialY + 4 * cellSize);
-        sudokuPath.lineTo(initialX + cellSize * rowAmount, initialY + 4 * cellSize);
+        clickHandler.sudoku = (e)=>this.handleClick(e);
+        keyHandler.sudoku = (e)=>this.handleKey(e);
+
+        const path99 = new Path2D();
+        const rowAmount99 = 9;
+        const cellSize99 = 50;
+        path99.moveTo(this.initialX + 3 * cellSize99, this.initialY);
+        path99.lineTo(this.initialX + 3 * cellSize99, this.initialY + cellSize99 * rowAmount99);
+        path99.moveTo(this.initialX + 6 * cellSize99, this.initialY);
+        path99.lineTo(this.initialX + 6 * cellSize99, this.initialY + cellSize99 * rowAmount99);
+        path99.moveTo(this.initialX, this.initialY + 3 * cellSize99);
+        path99.lineTo(this.initialX + cellSize99 * rowAmount99, this.initialY + 3 * cellSize99);
+        path99.moveTo(this.initialX, this.initialY + 6 * cellSize99);
+        path99.lineTo(this.initialX + cellSize99 * rowAmount99, this.initialY + 6 * cellSize99);
+        path99.closePath();
+
+
+        const path66 = new Path2D();
+        const rowAmount66 = 6;
+        const cellSize66 = 75;
+        path66.moveTo(this.initialX + 3 * cellSize66, this.initialY);
+        path66.lineTo(this.initialX + 3 * cellSize66, this.initialY + cellSize66 * rowAmount66);
+        path66.moveTo(this.initialX, this.initialY + 2 * cellSize66);
+        path66.lineTo(this.initialX + cellSize66 * rowAmount66, this.initialY + 2 * cellSize66);
+        path66.moveTo(this.initialX, this.initialY + 4 * cellSize66);
+        path66.lineTo(this.initialX + cellSize66 * rowAmount66, this.initialY + 4 * cellSize66);
+        path66.closePath();
+        this.sudokuPath = [path66, path99];
     }
-    sudokuPath.closePath();
+    
+    /** @param {MouseEvent} e */
+    handleClick(e) {
+        if(e.clientX < this.initialX || e.clientX > this.initialX + this.cellSize * this.rowAmount || e.clientY < this.initialY || e.clientY > this.initialY + this.cellSize * this.rowAmount) {
+            this.clicked[0] = null;
+            this.clicked[1] = null;
+        } else {
+            console.log(e.clientX, this.initialX, this.cellSize)
+            this.clicked[0] = Math.floor((e.clientX - this.initialX) / this.cellSize);
+            this.clicked[1] = Math.floor((e.clientY - this.initialY) / this.cellSize);
+        }
+        this.drawBoard();
+    }
+
+    /** @param {KeyboardEvent} e */
+    handleKey(e) {
+        console.log(e)
+        if(this.clicked[0] === null) return;
+        if(e.keyCode > 48 && e.keyCode < 58) {
+            const num = e.keyCode - 48;
+            this.board[this.clicked[0]][this.clicked[1]] = num;
+            this.checkInvalid(this.clicked[0], this.clicked[1]);
+            this.drawBoard();
+        } else if (e.key === "0" || e.key === "Backspace") {
+            this.board[this.clicked[0]][this.clicked[1]] = 0;
+            this.checkInvalid(this.clicked[0], this.clicked[1]);
+            this.drawBoard();
+        }
+    }
+
+    init(page) {
+        const boardStr = page.puzzle;
+        
+        if(boardStr.length === 81) {
+            this.type = 1;
+            this.rowAmount = 9;
+            this.cellSize = 450 / this.rowAmount;
+            this.halfCell = this.cellSize / 2;
+            this.board = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ]
+            
+            
+            
+        } else {
+            this.type = 0;
+            this.rowAmount = 6;
+            this.cellSize = 450 / this.rowAmount;
+            this.halfCell = this.cellSize / 2;
+            this.board = [
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+            ]
+            
+        }
 
 
-    const puzzle = boardStr.split("");
-    puzzle.forEach((num, index) => {
-         const x = index % rowAmount;
-         const y = Math.floor(index / rowAmount);
-         board[x][y] = Number(num);
-     })
+        const puzzle = boardStr.split("");
+        puzzle.forEach((num, index) => {
+            const x = index % this.rowAmount;
+            const y = Math.floor(index / this.rowAmount);
+            this.board[x][y] = Number(num);
+        })
 
-    drawBoard();
+        this.drawBoard();
+    }
+
+    drawBoard() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(this.initialX, this.initialY, this.cellSize * this.rowAmount, this.cellSize * this.rowAmount)
+        ctx.fillStyle = "black";
+        ctx.globalAlpha = 1;
+
+        for(let i = 1; i < this.rowAmount; i++) {
+            ctx.beginPath();
+            ctx.lineWidth = 1;
+            ctx.moveTo(this.initialX, this.initialY + i * this.cellSize);
+            ctx.lineTo(this.initialX + this.cellSize * this.rowAmount, this.initialY + i * this.cellSize)
+            ctx.moveTo(this.initialX + i * this.cellSize, this.initialY);
+            ctx.lineTo(this.initialX + i * this.cellSize, this.initialY + this.cellSize * this.rowAmount)
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+
+        ctx.stroke(this.sudokuPath[this.type]);
+
+        if(this.clicked[0] !== null) {
+            ctx.globalAlpha = 0.4;
+            ctx.fillStyle = "gray";
+            for(let i = 0; i < this.rowAmount; i++) {
+                ctx.rect(this.initialX + i * this.cellSize, this.initialY + this.clicked[1] * this.cellSize, this.cellSize, this.cellSize);
+                ctx.rect(this.initialX + this.clicked[0] * this.cellSize, this.initialY + i * this.cellSize, this.cellSize, this.cellSize);
+            }
+            ctx.fill();
+            ctx.beginPath();
+            ctx.globalAlpha = 0.5;
+            ctx.rect(this.initialX + this.clicked[0] * this.cellSize, this.initialY + this.clicked[1] * this.cellSize, this.cellSize, this.cellSize);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+        ctx.fillStyle = "red";
+        this.invalids.forEach(invalid => {
+            ctx.beginPath();
+            ctx.globalAlpha = 0.4;
+            ctx.rect(this.initialX + invalid[0] * this.cellSize, this.initialY + invalid[1] * this.cellSize, this.cellSize, this.cellSize);
+            ctx.fill();
+        })
+        ctx.globalAlpha = 1;
+
+        for(let x = 0; x < this.rowAmount; x++) {
+            for(let y = 0; y < this.rowAmount; y++) {
+                if(this.board[x][y] === 0) continue;
+                drawImageHelper(images["sudokuPet" + this.board[x][y]], this.initialX + x * this.cellSize + this.halfCell, this.initialY + y * this.cellSize + this.halfCell, this.cellSize * 0.8)
+            }
+        }
+    }
+
+    checkInvalid(x, y) {
+        const num = this.board[x][y];
+        if(num === 0) return;
+        for(let i = 0; i < 6; i++) {
+
+        }
+    }
+
+    render() {
+        drawText(ctx, "Fill each 3x3 set with a different pet", {
+            x: 50,
+            y: 100,
+            width: 200,
+            height: 200,
+            fontSize: 24,
+        });
+        drawText(ctx, "Fill cells until the this.board is complete. Pets in sets, rows or columns cannot repeat", {
+            x: 50,
+            y: 250,
+            width: 200,
+            height: 200,
+            fontSize: 24,
+        });
+        drawText(ctx, "Each pet can only appear on the this.board 9 times", {
+            x: 300,
+            y: 150,
+            width: 200,
+            height: 200,
+            fontSize: 24,
+        });
+        drawText(ctx, "Have Fun!", {
+            x: 50,
+            y: 400,
+            width: 200,
+            height: 200,
+            fontSize: 24,
+            fontWeight: 700
+        });
+
+        const pet = (issues[currentIssue].issue % 9) + 1;
+
+        drawImageHelper(images["sudokuPet" + pet], 400, 450, 100, 100);
+
+        this.drawBoard();
+    }
 }
+
+Games["sudoku"] = new Sudoku();

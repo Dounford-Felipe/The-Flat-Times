@@ -15,7 +15,7 @@
                     "font": 22
                 },
                 {
-                    "text": "444 days ago FlatMMO was released. It was a simple land with not many places to go, but 200 updates later we got more than 100 new enemies, new areas, and even a new skill!",
+                    "text": "444 days ago FlatMMO was released. It was a simple land with not many places to go, but 200 updates later we have more than 100 new enemies, new areas, and even a new skill!",
                     "x": 25,
                     "y": 320,
                     "width": 375,
@@ -78,8 +78,8 @@
             "format": "fullpage",
             "type": "puzzle",
             "game": "sudoku",
-            "puzzle": "017006900356194020089007106065000273872563419043000685521000000798005300634000590",
-            "puzzle2": "804071090976030000501960000307495000",
+            "puzzle": "648321900000007080005080402400050300060290000080700201000403069900060500030905804",
+            "solution": "648321975291547683375689412427158396163294758589736241852473169914862537736915824",
             "headline": "Sudoku"
         },
         {
