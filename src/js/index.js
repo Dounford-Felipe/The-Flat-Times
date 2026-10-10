@@ -136,6 +136,7 @@ function switchPage(direction) {
 }
 
 function renderMainPage() {
+    const page = issues[currentIssue].pages[0];
     //Page Background color
     ctx.fillStyle = "#e6e6e6";
     //Border color
@@ -164,22 +165,23 @@ function renderMainPage() {
     ctx.stroke();
 
     ctx.font = "48px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
-    ctx.fillText(issues[currentIssue].pages[0].headline.toLocaleUpperCase(), 575, 150);
+    ctx.fillText(page.headline.toLocaleUpperCase(), 575, 150);
     
     ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
 
-    for(let i = 0; i < issues[currentIssue].pages[0].text.length; i++) {
-        const text = issues[currentIssue].pages[0].text[i];
-        drawText(ctx, text, {
-            x: 100,
-            y: i * 100 + 200,
-            width: 200,
-            height: 200,
-            fontSize: 24,
+    for(let i = 0; i < page.text.length; i++) {
+        const text = page.text[i];
+        drawText(ctx, text.text, {
+            x: text.x,
+            y: text.y,
+            width: text.width || 500,
+            height: text.height || 200,
+            fontSize: text.font || 18,
+            align: "justify"
         });
     }
 
-    drawImageHelper(images[currentIssue + "_cover"], 575, 400, 400, 400);
+    drawImageHelper(images[currentIssue + "_cover"], 640, 400, 450, 400);
 
     ctx.beginPath()
     ctx.fillStyle = "#656565";
@@ -191,18 +193,36 @@ function renderMainPage() {
     for(let page = 1; page < issues[currentIssue].pages.length; page++) {
         if(issues[currentIssue].pages[page].format === "fullpage") {
             const sectionName = sectionsMap[issues[currentIssue].pages[page].type] || "Extras";
-            ctx.fillText(sectionName, 1000, 250 + (30 * sections));
+            drawText(ctx, sectionName, {
+                x: 900,
+                y: 30 * sections + 240,
+                width: 225,
+                height: 30,
+                fontSize: 16,
+            });
             ctx.moveTo(900, 260 + (30 * sections));
             ctx.lineTo(1125, 260 + (30 * sections));
             sections++;
         } else {
             const section1Name = sectionsMap[issues[currentIssue].pages[page].sections[0].type] || "Extras";
             const section2Name = sectionsMap[issues[currentIssue].pages[page].sections[1].type] || "Extras";
-            ctx.fillText(section1Name, 1000, 250 + (30 * sections));
+            drawText(ctx, section1Name, {
+                x: 900,
+                y: 30 * sections + 240,
+                width: 225,
+                height: 30,
+                fontSize: 16,
+            });
             ctx.moveTo(900, 260 + (30 * sections));
             ctx.lineTo(1125, 260 + (30 * sections));
             sections++;
-            ctx.fillText(section2Name, 1000, 250 + (30 * sections));
+            drawText(ctx, section2Name, {
+                x: 900,
+                y: 30 * sections + 240,
+                width: 225,
+                height: 30,
+                fontSize: 16,
+            });
             ctx.moveTo(900, 260 + (30 * sections));
             ctx.lineTo(1125, 260 + (30 * sections));
             sections++;

@@ -1,15 +1,33 @@
 {
     "issue": 1,
-    "date": "October 7, 2026",
+    "date": "October 10, 2026",
     "pages": [
         {
             "format": "fullpage",
             "type": "mainPage",
             "headline": "Flat Times Officially Launches!",
             "text": [
-                "This is the first edition",
-                "We will have more text",
-                "Stay tuned"
+                {
+                    "text": "Welcome to the first edition of The Flat Times! Your source for news, stories and adventures across Flatland",
+                    "x": 25,
+                    "y": 170,
+                    "width": 375,
+                    "font": 22
+                },
+                {
+                    "text": "444 days ago FlatMMO was released. It was a simple land with not many places to go, but 200 updates later we got more than 100 new enemies, new areas, and even a new skill!",
+                    "x": 25,
+                    "y": 320,
+                    "width": 375,
+                    "font": 22
+                },
+                {
+                    "text": "Turn the page, take a break from the grind and enjoy this week's features and some awesome player creations!",
+                    "x": 25,
+                    "y": 470,
+                    "width": 375,
+                    "font": 22
+                }
             ]
         },
         {
@@ -18,26 +36,41 @@
             "headline": "EverBrook Bank",
             "text": [
                 {
-                    "text": "Everbrook Bank, also known as EB, is the hot spot in the Flatland",
-                    "x": 600,
-                    "y": 0
+                    "text": "First version of Everbrook Bank",
+                    "x": 200,
+                    "y": 250,
+                    "font": 10
                 },
                 {
-                    "text": "Flatters of all ages get together to talk and trade there",
-                    "x": 600,
-                    "y": 200
+                    "text": "Everbrook Bank, widely known as EB, is where the adventure truly starts. Its main purpose is for Flatters to deposit and withdraw their hard-earned items.",
+                    "x": 25,
+                    "y": 320,
+                    "font": 24
                 },
                 {
-                    "text": "The bank main porpose is to bank and withdraw items, to list and buy items from the Global Market",
-                    "x": 600,
-                    "y": 400
+                    "text": "Everbrook Bank was made available for the first time about 21.5 moons ago. At that time, it allowed flatters to sell items directly inside the bank.",
+                    "x": 25,
+                    "y": 450,
+                    "font": 24
+                },
+                {
+                    "text": "Today, the bank is the central hub for trades, chat, and gatherings. While selling directly to townspeople is not a possibility anymore, it hosts the always competitive Global Market.",
+                    "x": 630,
+                    "y": 50,
+                    "font": 24
                 }
             ],
             "images": [
                 {
                     "name": "featuredArea",
-                    "x": 275,
-                    "y": 350
+                    "x": 875,
+                    "y": 400
+                },
+                {
+                    "name": "originalBank",
+                    "x": 270,
+                    "y": 230,
+                    "width": 250
                 }
             ]
         },
@@ -82,7 +115,7 @@
                     "width": 460
                 },
                 {
-                    "text": "Ever since then, more people have came and joined the fun.\nAt first they walk slowly, but then they learn how to run.\nTrapped together in this world, we can quest and we can chat.\nAnd that's what happened when I awoke in a world that was Flat.",
+                    "text": "Ever since then, more people have come and joined the fun.\nAt first they walk slowly, but then they learn how to run.\nTrapped together in this world, we can quest and we can chat.\nAnd that's what happened when I awoke in a world that was Flat.",
                     "x": 650,
                     "y": 340,
                     "width": 450
@@ -124,15 +157,27 @@
                         {
                             "name": "fanart",
                             "x": 290,
-                            "y": 350,
-                            "width": 520
+                            "y": 490,
+                            "width": 380
+                        },
+                        {
+                            "name": "fanart2",
+                            "x": 290,
+                            "y": 200,
+                            "width": 380
                         }
                     ],
                     "text": [
                         {
                             "text": "-By Sunlit",
-                            "x": 465,
-                            "y": 405,
+                            "x": 410,
+                            "y": 500,
+                            "font": 15
+                        },
+                        {
+                            "text": "-By mitch_tea",
+                            "x": 350,
+                            "y": 250,
                             "font": 15
                         }
                     ]
@@ -160,7 +205,7 @@
                     "headline": "We Need Your help!",
                     "text": [
                         {
-                            "text": "The Flat Times is looking for fresh ink! Do you have stories to tell, witty riddles, or original jokes to share with the flatland?",
+                            "text": "The Flat Times is looking for fresh ink! Do you have stories to tell, witty riddles, or original jokes to share with the Flatland?",
                             "x": 40,
                             "y": 170,
                             "width": 525
@@ -204,8 +249,10 @@
     "images": [
         "cover",
         "featuredArea",
+        "originalBank",
         "ad",
         "comic",
-        "fanart"
+        "fanart",
+        "fanart2"
     ]
 }
