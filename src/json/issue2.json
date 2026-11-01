@@ -1,0 +1,391 @@
+{
+	"issue": 2,
+	"date": "October 31, 2026",
+	"pages": [
+		{
+			"format": "fullpage",
+			"type": "mainPage",
+			"headline": "Ghosts are out Tonight!",
+			"text": [
+				{
+					"text": "Don't be bemused, it's just the news! Flatland is flooded with ghosts for the Halloween party.",
+					"x": 25,
+					"y": 130,
+					"width": 375,
+					"font": 22
+				},
+				{
+					"text": "As part of the party, candies are falling from the skies and being exchanged for masks.",
+					"x": 25,
+					"y": 220,
+					"width": 375,
+					"font": 22
+				},
+				{
+					"text": "Flatters all arount the land are reporting strange sights, some are even saying that \"He\" is coming. We are yet to know who is \"He\" and what such person wants.",
+					"x": 25,
+					"y": 340,
+					"width": 375,
+					"font": 22
+				},
+				{
+					"text": "Turn the page, take a break from the grind and find out the winners of the writing competion and some their awesome player creations!",
+					"x": 25,
+					"y": 470,
+					"width": 375,
+					"font": 22
+				}
+			]
+		},
+		{
+			"format": "fullpage",
+			"type": "featuredArea",
+			"headline": "Mystic Vale\nOrb Pile",
+			"text": [
+				{
+					"text": "In earlier version the meteor could spawn here, but was removed due to lag.",
+					"x": 70,
+					"y": 240,
+					"font": 12
+				},
+				{
+					"text": "The Mystic Vale Orb Pile is a place where most Flatters go to dig for Unpowered Orbs, either during the day or while they sleep.",
+					"x": 25,
+					"y": 320,
+					"font": 24
+				},
+				{
+					"text": "The Pile has been very popular ever since the games release many moons ago. It stands as the most popular room in the whole of Flatmmo.",
+					"x": 25,
+					"y": 450,
+					"font": 24
+				},
+				{
+					"text": "It may not be the best place to get those juice Enchanting XP, but if you are in need of some unpowered orbs and don't want to spend your days grinding them, we truly recommend coming down to the Orb Pile when you decide to catch some ZZZ's",
+					"x": 630,
+					"y": 50,
+					"font": 24
+				}
+			],
+			"images": [
+				{
+					"name": "featuredArea",
+					"x": 875,
+					"y": 400
+				},
+				{
+					"name": "featuredArea2",
+					"x": 270,
+					"y": 250,
+					"width": 250
+				}
+			]
+		},
+		{
+			"format": "fullpage",
+			"type": "puzzle2",
+			"game": "crosswords",
+			"headline": "Crosswords",
+			"text": [
+				{
+					"text": "Down",
+					"x": 30,
+					"y": 50,
+					"bold": true,
+					"align": "center",
+					"width": 250
+				},
+				{
+					"text": "𝟏．To Move Quickly",
+					"x": 30,
+					"y": 100
+				},
+				{
+					"text": "3．Mini Tasks to Complete",
+					"x": 30,
+					"y": 150
+				},
+				{
+					"text": "4．Used to Level Up",
+					"x": 30,
+					"y": 200
+				},
+				{
+					"text": "7．A Site of Knowledge",
+					"x": 30,
+					"y": 250
+				},
+				{
+					"text": "8．An Adventure",
+					"x": 30,
+					"y": 300
+				},
+				{
+					"text": "9．How to Gain XP",
+					"x": 30,
+					"y": 350
+				},
+				{
+					"text": "10．What You Don't Have",
+					"x": 30,
+					"y": 400
+				},
+				{
+					"text": "Across",
+					"x": 300,
+					"y": 50,
+					"bold": true,
+					"align": "center",
+					"width": 250
+				},
+				{
+					"text": "2．A Place to Store Items",
+					"x": 300,
+					"y": 100
+				},
+				{
+					"text": "5．A Human Being",
+					"x": 300,
+					"y": 150
+				},
+				{
+					"text": "6．When You Feel Tired",
+					"x": 300,
+					"y": 200
+				},
+				{
+					"text": "11．The Starting Area",
+					"x": 300,
+					"y": 250
+				},
+				{
+					"text": "12．Used to Cut trees",
+					"x": 300,
+					"y": 300
+				},
+				{
+					"text": "13．The Fabulous ______",
+					"x": 300,
+					"y": 350
+				}
+			],
+			"images": [
+				{
+					"name": "crosswords",
+					"x": 875,
+					"y": 350,
+					"width": 500,
+					"height": "Infinity"
+				}
+			]
+		},
+		{
+			"format": "fullpage",
+			"type": "contest",
+			"headline": "Writing Contest",
+			"text": [
+				{
+					"text": "A Message in a Bottle",
+					"x": 50,
+					"y": 50,
+					"bold": true,
+					"align": "center"
+				},
+				{
+					"text": "Pirates are red\nMages are blue\nMarin, how do you do?\nHope them pirates are good,\nTheir smiles worth their weight in gold\nShiny pieces of glass, the Islands' a blast\nIf you see a pirate, tell em I said hI\nSee you later,\nin Everbrook i hope",
+					"x": 50,
+					"y": 160
+				},
+				{
+					"text": "-Submmited by Yolohombre",
+					"x": 320,
+					"y": 270
+				},
+				{
+					"text": "I only appear once in the game, I am thrown away immediately, but recovered later to fulfill my only purpose. What am I?",
+					"x": 50,
+					"y": 330,
+					"width": 505
+				},
+				{
+					"text": "𝐀𝐧𝐬𝐰𝐞𝐫: ǝʇᴉɯɐuʎp",
+					"x": 50,
+					"y": 360
+				},
+				{
+					"text": "-Submmited by Yolohombre",
+					"x": 320,
+					"y": 390
+				},
+				{
+					"text": "An Ent walks into a bar. The bartender looks at him and says, \"Why the log face?\"",
+					"x": 50,
+					"y": 450
+				},
+				{
+					"text": "-Submmited by 0range",
+					"x": 330,
+					"y": 490
+				},
+				{
+					"text": "Adoration of Alien",
+					"x": 650,
+					"y": -20,
+					"align": "center",
+					"bold": true
+				},
+				{
+					"text": "Fair beauty, your green pallor complements the rock so gently\nEyes, big, black, and gorgeous\nI could get lost in their grey eternity\nYour pickaxe, coveted by all\nBut your heart, I wish, will be mine alone\n\nFrom the heavens you fell, like an angel\nYour elegance runs as deep as space\nSure as meteors fall, I yearn\nAnd hope you will come back to me, \nbut regardless\nI shall see you again in the stars again my love",
+					"x": 650,
+					"y": 130,
+					"width": 460
+				},
+				{
+					"text": "-Submmited By taoteching",
+					"x": 900,
+					"y": 285
+				},
+				{
+					"text": "“Can I borrow your possessed hunting mask for the collection log?”\n“Sure.”\n“Thanks.”\nLogs out with your possessed hunting mask.",
+					"x": 650,
+					"y": 370,
+					"width": 450
+				},
+				{
+					"text": "-Submmited by Gin",
+					"x": 950,
+					"y": 450
+				}
+			]
+		},
+		{
+			"format": "fullpage",
+			"type": "art",
+			"headline": "Fan Art",
+			"images": [
+				{
+					"name": "fanart",
+					"x": 250,
+					"y": 250,
+					"width": 320
+				},
+				{
+					"name": "fanart2",
+					"x": 250,
+					"y": 510,
+					"width": 350
+				},
+				{
+					"name": "fanart3",
+					"x": 890,
+					"y": 250,
+					"width": 350
+				},
+				{
+					"name": "fanart4",
+					"x": 890,
+					"y": 530,
+					"width": 320
+				}
+			],
+			"text": [
+				{
+					"text": "-By II585II",
+					"x": 100,
+					"y": 270,
+					"font": 15
+				},
+				{
+					"text": "-By 0range",
+					"x": 345,
+					"y": 515,
+					"font": 15
+				},
+				{
+					"text": "-By Tadakatsu ",
+					"x": 750,
+					"y": 310,
+					"font": 15
+				},
+				{
+					"text": "-By TheBacon",
+					"x": 1050,
+					"y": 505,
+					"font": 15
+				}
+			]
+		},
+		{
+			"format": "half",
+			"sections": [
+				{
+					"type": "ad",
+					"images": [
+						{
+							"name": "ad",
+							"x": 288,
+							"y": 320,
+							"width": "Infinity",
+							"height": 640,
+							"clip": true
+						}
+					]
+				},
+				{
+					"type": "help",
+					"headline": "We Need Your help!",
+					"text": [
+						{
+							"text": "The Flat Times is looking for fresh ink! Do you have stories to tell, witty riddles, or original jokes to share with the Flatland?",
+							"x": 40,
+							"y": 170,
+							"width": 525
+						},
+						{
+							"text": "SUBMISSION GUIDELINES:\n• All content must be original.\n• Include the answer when submitting riddles.\n• Accepted submissions will be featured in upcoming editions!",
+							"x": 40,
+							"y": 320,
+							"width": 525
+						},
+						{
+							"text": "Send your drafts via Discord ticket or directly to our Chief Editor:",
+							"x": 40,
+							"y": 450,
+							"width": 525
+						},
+						{
+							"text": "@dounford",
+							"x": 130,
+							"y": 505
+						},
+						{
+							"text": "discord.gg/KHz4sEUse3",
+							"x": 270,
+							"y": 505
+						}
+					],
+					"images": [
+						{
+							"name": "discord",
+							"x": 80,
+							"y": 600,
+							"width": 50,
+							"global": true
+						}
+					]
+				}
+			]
+		}
+	],
+	"images": [
+		"cover",
+		"featuredArea",
+		"featuredArea2",
+		"ad",
+		"fanart",
+		"fanart2",
+		"fanart3",
+		"fanart4",
+		"crosswords"
+	]
+}

@@ -1,24 +1,25 @@
 import lastIssue from '../json/issues.json' with { type: 'json' };
 
 const sectionsMap = {
-    featuredArea: "Featured Area",
-    puzzle: "Puzzle",
-    ad: "Advertisement",
-    joke: "Jokes",
-    riddle: "Riddles",
-    poetry: "Poetry",
-    comic: "Comics",
-    help: "Help Us!",
-    bot: "Ask Yuri",
-    dev: "Ask Smitty",
-    featuredStory: "Featured Story",
-    art: "Fan Art",
-    announcement: "Announcements",
-    news: "Breaking News",
-    contest: "Contest",
-    poll: "Poll",
-    tip: "Tips",
-    extra: "Extras"
+	featuredArea: "Featured Area",
+	puzzle: "Puzzle",
+	puzzle2: "Puzzle", //This is image/text only without logic
+	ad: "Advertisement",
+	joke: "Jokes",
+	riddle: "Riddles",
+	poetry: "Poetry",
+	comic: "Comics",
+	help: "Help Us!",
+	bot: "Ask Yuri",
+	dev: "Ask Smitty",
+	featuredStory: "Featured Story",
+	art: "Fan Art",
+	announcement: "Announcements",
+	news: "Breaking News",
+	contest: "Contest",
+	poll: "Poll",
+	tip: "Tips",
+	extra: "Extras"
 }
 
 window.issues = {};
@@ -28,365 +29,368 @@ let currentPage = 0;
 let currentGame = null;
 
 async function loadImages(imagesArr) {
-    const loadPromises = imagesArr.map(imagePath => {
-        const img = new Image();
-        img.src = imagePath[1];
-        images[imagePath[0]] = img;
-        return new Promise((resolve) => {
-            if (img.complete && img.naturalWidth !== 0) {
-                resolve();
-            } else {
-                img.onload = () => resolve();
-                img.onerror = () => resolve();
-            }
-        });
-    });
-    
-    await Promise.all(loadPromises);
+	const loadPromises = imagesArr.map(imagePath => {
+		const img = new Image();
+		img.src = imagePath[1];
+		images[imagePath[0]] = img;
+		return new Promise((resolve) => {
+			if (img.complete && img.naturalWidth !== 0) {
+				resolve();
+			} else {
+				img.onload = () => resolve();
+				img.onerror = () => resolve();
+			}
+		});
+	});
+
+	await Promise.all(loadPromises);
 }
 
 async function loadIssue(issue) {
-  try {
-    const issueJson = await import(`../json/issue${issue}.json`, { with: { type: 'json' } });
+	try {
+		const issueJson = await import(`../json/issue${issue}.json`, { with: { type: 'json' } });
 
-    issues[issue] = issueJson.default;
-  } catch (err) {
-    console.error(`Issue ${issue} could not be loaded, with error:\n`, err);
-  }
+		issues[issue] = issueJson.default;
+	} catch (err) {
+		console.error(`Issue ${issue} could not be loaded, with error:\n`, err);
+	}
 }
 
 async function init() {
-    const imagesArr = [];
-    for (let i = 1; i < 10; i++) {
-        imagesArr.push(["sudokuPet" + i, `./src/images/global/sudokuPet${i}.png`])
-    }
-    
-    imagesArr.push(["discord", `./src/images/global/discord.png`]);
-    
-    await loadImages(imagesArr);
-    await switchIssue(lastIssue);
-    switchPage(2)
+	const imagesArr = [];
+	for (let i = 1; i < 10; i++) {
+		imagesArr.push(["sudokuPet" + i, `./src/images/global/sudokuPet${i}.png`])
+	}
+
+	imagesArr.push(["discord", `./src/images/global/discord.png`]);
+
+	await loadImages(imagesArr);
+	await switchIssue(lastIssue);
+	switchPage(2)
 }
 
 async function switchIssue(issue) {
-    if(issue > lastIssue || issue < 1) return;
-    if(!Object.hasOwn(issues, issue)) {
-        await loadIssue(issue);
-    }
-    currentIssue = issue;
-    const imagesArr = issues[currentIssue].images.map(imagePath => [`${issue}_${imagePath}`, `./src/images/${issue}/${imagePath}.png`]);
-    await loadImages(imagesArr);
-    renderMainPage();
-    canvas.focus();
-    issues[issue].pages.forEach(page => {
-        if(page?.type === "puzzle") {
-            Games[page.game].init(page);
-        }
-    })
+	if (issue > lastIssue || issue < 1) return;
+	if (!Object.hasOwn(issues, issue)) {
+		await loadIssue(issue);
+	}
+	currentIssue = issue;
+	const imagesArr = issues[currentIssue].images.map(imagePath => [`${issue}_${imagePath}`, `./src/images/${issue}/${imagePath}.png`]);
+	await loadImages(imagesArr);
+	renderMainPage();
+	canvas.focus();
+	issues[issue].pages.forEach(page => {
+		if (page?.type === "puzzle") {
+			Games[page.game].init(page);
+		}
+	})
 }
 
 function switchPage(direction) {
-    const newPage = currentPage + direction;
-    const pageCount = issues[currentIssue].pages.length - 1;
-    if(newPage > pageCount || newPage < 0) return;
-    currentPage = newPage;
-    currentGame = null;
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-    if(newPage === 0) {
-        renderMainPage();
-    } else {
-        renderPage();
-    }
+	const newPage = currentPage + direction;
+	const pageCount = issues[currentIssue].pages.length - 1;
+	if (newPage > pageCount || newPage < 0) return;
+	currentPage = newPage;
+	currentGame = null;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	if (newPage === 0) {
+		renderMainPage();
+	} else {
+		renderPage();
+	}
 }
 
 function renderMainPage() {
-    const page = issues[currentIssue].pages[0];
-    //Page Background color
-    ctx.fillStyle = "#e6e6e6";
-    //Border color
-    ctx.strokeStyle = "#000000";
-    //Border Width
-    ctx.lineWidth = 2;
-    //Page Borders
-    ctx.fill(bgFullPath);
-    ctx.stroke(bgFullPath);
-    
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "black";
-    ctx.font = "bold 64px 'Times New Roman', Times, serif";
-    ctx.fillText("THE FLAT TIMES", 575, 50);
-    ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
-    ctx.fillText("$10", 100, 50);
-    ctx.fillText("Issue #" + issues[currentIssue].issue, 1050, 50);
-    ctx.beginPath();
-    ctx.moveTo(25, 80);
-    ctx.lineTo(1125, 80);
-    ctx.fillText("Flatland Newspaper", 120, 95);
-    ctx.fillText(issues[currentIssue].date, 1050, 95);
-    ctx.moveTo(25, 110);
-    ctx.lineTo(1125, 110);
-    ctx.stroke();
+	const page = issues[currentIssue].pages[0];
+	//Page Background color
+	ctx.fillStyle = "#e6e6e6";
+	//Border color
+	ctx.strokeStyle = "#000000";
+	//Border Width
+	ctx.lineWidth = 2;
+	//Page Borders
+	ctx.fill(bgFullPath);
+	ctx.stroke(bgFullPath);
 
-    ctx.font = "48px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
-    ctx.fillText(page.headline.toLocaleUpperCase(), 575, 150);
-    
-    ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
+	ctx.fillStyle = "black";
+	ctx.font = "bold 64px 'Times New Roman', Times, serif";
+	ctx.fillText("THE FLAT TIMES", 575, 50);
+	ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
+	ctx.fillText("$10", 100, 50);
+	ctx.fillText("Issue #" + issues[currentIssue].issue, 1050, 50);
+	ctx.beginPath();
+	ctx.moveTo(25, 80);
+	ctx.lineTo(1125, 80);
+	ctx.fillText("Flatland Newspaper", 120, 95);
+	ctx.fillText(issues[currentIssue].date, 1050, 95);
+	ctx.moveTo(25, 110);
+	ctx.lineTo(1125, 110);
+	ctx.stroke();
 
-    for(let i = 0; i < page.text.length; i++) {
-        const text = page.text[i];
-        drawText(ctx, text.text, {
-            x: text.x,
-            y: text.y,
-            width: text.width || 500,
-            height: text.height || 200,
-            fontSize: text.font || 18,
-            align: "justify"
-        });
-    }
+	ctx.font = "48px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
+	ctx.fillText(page.headline.toLocaleUpperCase(), 575, 150);
 
-    drawImageHelper(images[currentIssue + "_cover"], 640, 400, 450, 400);
+	ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
 
-    ctx.beginPath()
-    ctx.fillStyle = "#656565";
-    ctx.fillText("Sections", 935, 250);
-    ctx.moveTo(900, 260);
-    ctx.lineTo(1125, 260);
+	for (let i = 0; i < page.text.length; i++) {
+		const text = page.text[i];
+		drawText(ctx, text.text, {
+			x: text.x,
+			y: text.y,
+			width: text.width || 500,
+			height: text.height || 200,
+			fontSize: text.font || 18,
+			align: text.align || "justify",
+			fontStyle: text.bold ? "bold" : ""
+		});
+	}
 
-    let sections = 1;
-    for(let page = 1; page < issues[currentIssue].pages.length; page++) {
-        if(issues[currentIssue].pages[page].format === "fullpage") {
-            const sectionName = sectionsMap[issues[currentIssue].pages[page].type] || "Extras";
-            drawText(ctx, sectionName, {
-                x: 900,
-                y: 30 * sections + 240,
-                width: 225,
-                height: 30,
-                fontSize: 16,
-            });
-            ctx.moveTo(900, 260 + (30 * sections));
-            ctx.lineTo(1125, 260 + (30 * sections));
-            sections++;
-        } else {
-            const section1Name = sectionsMap[issues[currentIssue].pages[page].sections[0].type] || "Extras";
-            const section2Name = sectionsMap[issues[currentIssue].pages[page].sections[1].type] || "Extras";
-            drawText(ctx, section1Name, {
-                x: 900,
-                y: 30 * sections + 240,
-                width: 225,
-                height: 30,
-                fontSize: 16,
-            });
-            ctx.moveTo(900, 260 + (30 * sections));
-            ctx.lineTo(1125, 260 + (30 * sections));
-            sections++;
-            drawText(ctx, section2Name, {
-                x: 900,
-                y: 30 * sections + 240,
-                width: 225,
-                height: 30,
-                fontSize: 16,
-            });
-            ctx.moveTo(900, 260 + (30 * sections));
-            ctx.lineTo(1125, 260 + (30 * sections));
-            sections++;
-        }
-    }
-    ctx.stroke();
+	drawImageHelper(images[currentIssue + "_cover"], 640, 400, 450, 400);
+
+	ctx.beginPath()
+	ctx.fillStyle = "#656565";
+	ctx.fillText("Sections", 935, 250);
+	ctx.moveTo(900, 260);
+	ctx.lineTo(1125, 260);
+
+	let sections = 1;
+	for (let page = 1; page < issues[currentIssue].pages.length; page++) {
+		if (issues[currentIssue].pages[page].format === "fullpage") {
+			const sectionName = sectionsMap[issues[currentIssue].pages[page].type] || "Extras";
+			drawText(ctx, sectionName, {
+				x: 900,
+				y: 30 * sections + 240,
+				width: 225,
+				height: 30,
+				fontSize: 16,
+			});
+			ctx.moveTo(900, 260 + (30 * sections));
+			ctx.lineTo(1125, 260 + (30 * sections));
+			sections++;
+		} else {
+			const section1Name = sectionsMap[issues[currentIssue].pages[page].sections[0].type] || "Extras";
+			const section2Name = sectionsMap[issues[currentIssue].pages[page].sections[1].type] || "Extras";
+			drawText(ctx, section1Name, {
+				x: 900,
+				y: 30 * sections + 240,
+				width: 225,
+				height: 30,
+				fontSize: 16,
+			});
+			ctx.moveTo(900, 260 + (30 * sections));
+			ctx.lineTo(1125, 260 + (30 * sections));
+			sections++;
+			drawText(ctx, section2Name, {
+				x: 900,
+				y: 30 * sections + 240,
+				width: 225,
+				height: 30,
+				fontSize: 16,
+			});
+			ctx.moveTo(900, 260 + (30 * sections));
+			ctx.lineTo(1125, 260 + (30 * sections));
+			sections++;
+		}
+	}
+	ctx.stroke();
 }
 
 function renderPage() {
-    //Page Background color
-    ctx.fillStyle = "#e6e6e6";
-    //Border color
-    ctx.strokeStyle = "#000000";
-    //Border Width
-    ctx.lineWidth = 2;
-    
+	//Page Background color
+	ctx.fillStyle = "#e6e6e6";
+	//Border color
+	ctx.strokeStyle = "#000000";
+	//Border Width
+	ctx.lineWidth = 2;
 
-    //Page Borders
-    ctx.fill(bgPath);
-    ctx.stroke(bgPath);
 
-    //Content
-    if(issues[currentIssue].pages[currentPage].format === "fullpage") {
-        drawContentFull();
-    } else {
-        drawContent();
-    }
-    
-    ctx.lineWidth = 2;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "black";
-    ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
-    ctx.beginPath();
-    ctx.moveTo(25, 20);
-    ctx.lineTo(530, 20);
-    ctx.moveTo(25, 50);
-    ctx.lineTo(530, 50);
-    ctx.moveTo(620, 20);
-    ctx.lineTo(1125, 20);
-    ctx.moveTo(620, 50);
-    ctx.lineTo(1125, 50);
-    ctx.stroke();
+	//Page Borders
+	ctx.fill(bgPath);
+	ctx.stroke(bgPath);
 
-    //Shadow
-    const shadowWidth = 30;
-    
-    ctx.save();
-    ctx.clip(bgPath);
+	//Content
+	if (issues[currentIssue].pages[currentPage].format === "fullpage") {
+		drawContentFull();
+	} else {
+		drawContent();
+	}
 
-    const grad = ctx.createLinearGradient(meio - shadowWidth, 0, meio + shadowWidth, 0);
-    grad.addColorStop(0, "rgba(0, 0, 0, 0)");
-    grad.addColorStop(0.5, "rgba(0, 0, 0, 0.18)");
-    grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+	ctx.lineWidth = 2;
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
+	ctx.fillStyle = "black";
+	ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
+	ctx.beginPath();
+	ctx.moveTo(25, 20);
+	ctx.lineTo(530, 20);
+	ctx.moveTo(25, 50);
+	ctx.lineTo(530, 50);
+	ctx.moveTo(620, 20);
+	ctx.lineTo(1125, 20);
+	ctx.moveTo(620, 50);
+	ctx.lineTo(1125, 50);
+	ctx.stroke();
 
-    ctx.fillStyle = grad;
-    ctx.fillRect(meio - shadowWidth, 0, shadowWidth * 2, canvas.height);
+	//Shadow
+	const shadowWidth = 30;
 
-    ctx.restore();
-    ctx.lineWidth = 2;
+	ctx.save();
+	ctx.clip(bgPath);
 
-    ctx.beginPath();
-    ctx.moveTo(meio, recuo);
-    ctx.lineTo(meio, canvas.height - recuo);
-    ctx.stroke();
+	const grad = ctx.createLinearGradient(meio - shadowWidth, 0, meio + shadowWidth, 0);
+	grad.addColorStop(0, "rgba(0, 0, 0, 0)");
+	grad.addColorStop(0.5, "rgba(0, 0, 0, 0.18)");
+	grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+	ctx.fillStyle = grad;
+	ctx.fillRect(meio - shadowWidth, 0, shadowWidth * 2, canvas.height);
+
+	ctx.restore();
+	ctx.lineWidth = 2;
+
+	ctx.beginPath();
+	ctx.moveTo(meio, recuo);
+	ctx.lineTo(meio, canvas.height - recuo);
+	ctx.stroke();
 }
 
 function drawContentFull() {
-    const page = issues[currentIssue].pages[currentPage];
-    ctx.fillStyle = "black";
+	const page = issues[currentIssue].pages[currentPage];
+	ctx.fillStyle = "black";
 
-    ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
+	ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
 
-    if(page.type) {
-        drawText(ctx, sectionsMap[page.type], {
-            x: 25,
-            y: 30,
-            width: 475,
-            fontSize: 16,
-        });
-        drawText(ctx, sectionsMap[page.type], {
-            x: 650,
-            y: 30,
-            width: 475,
-            fontSize: 16,
-        });
-    }
+	if (page.type) {
+		drawText(ctx, sectionsMap[page.type], {
+			x: 25,
+			y: 30,
+			width: 475,
+			fontSize: 16,
+		});
+		drawText(ctx, sectionsMap[page.type], {
+			x: 650,
+			y: 30,
+			width: 475,
+			fontSize: 16,
+		});
+	}
 
-    ctx.font = "48px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
-    if(page.headline) {
-        drawText(ctx, page.headline.toLocaleUpperCase(), {
-            x: 0,
-            y: 75,
-            width: 550,
-            fontSize: 48,
-        });
-    }
-    
-    ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
+	ctx.font = "48px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
+	if (page.headline) {
+		drawText(ctx, page.headline.toLocaleUpperCase(), {
+			x: 0,
+			y: 75,
+			width: 550,
+			fontSize: 48,
+		});
+	}
 
-    if(page.type === "puzzle") {
-        currentGame = page.game;
-        Games[page.game].render();
-        return;
-    }
-    
-    if(page.images) {
-        page.images.forEach(image => {
-            const imagePath = image?.global ? images[image.name] : images[`${currentIssue}_${image.name}`];
-            drawImageHelper(imagePath, image.x, image.y, image.width || 450, image.height || 450);
-        })
-    }
+	ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
 
-    if(page.text) {
-        page.text.forEach(text => {
-            drawText(ctx, text.text, {
-                x: text.x,
-                y: text.y,
-                width: text.width || 500,
-                height: text.height || 200,
-                fontSize: text.font || 18,
-                align: "justify"
-            });
-        })
-    }
+	if (page.type === "puzzle") {
+		currentGame = page.game;
+		Games[page.game].render();
+		return;
+	}
+
+	if (page.images) {
+		page.images.forEach(image => {
+			const imagePath = image?.global ? images[image.name] : images[`${currentIssue}_${image.name}`];
+			drawImageHelper(imagePath, image.x, image.y, image.width || 450, image.height || 450);
+		})
+	}
+
+	if (page.text) {
+		page.text.forEach(text => {
+			drawText(ctx, text.text, {
+				x: text.x,
+				y: text.y,
+				width: text.width || 500,
+				height: text.height || 200,
+				fontSize: text.font || 18,
+				align: text.align || "justify",
+				fontStyle: text.bold ? "bold" : ""
+			});
+		})
+	}
 }
 
 function drawContent() {
-    const page = issues[currentIssue].pages[currentPage];
+	const page = issues[currentIssue].pages[currentPage];
 
-    ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
-    ctx.fillStyle = "black";
+	ctx.font = "16px 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif";
+	ctx.fillStyle = "black";
 
-    for(let i = 0; i < 2; i++) {
-        const initialX = i * 575;
-        const section = page.sections[i];
-        if(section.images) {
-            section.images.forEach(image => {
-                const imagePath = image?.global ? images[image.name] : images[`${currentIssue}_${image.name}`];
-                drawImageHelper(imagePath, initialX + image.x, image.y, image.width || 450, image.height || 450, image.clip || false)
-            })
-        }
+	for (let i = 0; i < 2; i++) {
+		const initialX = i * 575;
+		const section = page.sections[i];
+		if (section.images) {
+			section.images.forEach(image => {
+				const imagePath = image?.global ? images[image.name] : images[`${currentIssue}_${image.name}`];
+				drawImageHelper(imagePath, initialX + image.x, image.y, image.width || 450, image.height || 450, image.clip || false)
+			})
+		}
 
-        if(section.text) {
-            section.text.forEach(text => {
-                drawText(ctx, text.text, {
-                    x: initialX + text.x,
-                    y: text.y,
-                    width: text.width || 575,
-                    height: text.height || 200,
-                    fontSize: text.font || 24,
-                    align: "justify"
-                });
-            })
-        }
+		if (section.text) {
+			section.text.forEach(text => {
+				drawText(ctx, text.text, {
+					x: initialX + text.x,
+					y: text.y,
+					width: text.width || 575,
+					height: text.height || 200,
+					fontSize: text.font || 24,
+					align: text.align || "justify",
+					fontStyle: text.bold ? "bold" : ""
+				});
+			})
+		}
 
-        //Section Name
-        if(section.type) {
-            drawText(ctx, sectionsMap[section.type], {
-                x: 25 + (625 * i),
-                y: 30,
-                width: 475,
-                fontSize: 16,
-            });
-        }
-        //Headline
-        if(section.headline) {
-            drawText(ctx, section.headline.toLocaleUpperCase(), {
-                x: 25 + (625 * i),
-                y: 75,
-                width: 475,
-                fontSize: 48,
-            });
-        }
-    }
+		//Section Name
+		if (section.type) {
+			drawText(ctx, sectionsMap[section.type], {
+				x: 25 + (625 * i),
+				y: 30,
+				width: 475,
+				fontSize: 16,
+			});
+		}
+		//Headline
+		if (section.headline) {
+			drawText(ctx, section.headline.toLocaleUpperCase(), {
+				x: 25 + (625 * i),
+				y: 75,
+				width: 475,
+				fontSize: 48,
+			});
+		}
+	}
 }
 
 
 /** @param {MouseEvent} */
-canvas.addEventListener("click", /** @param {MouseEvent} e */ (e) => {
-    if(currentGame) {
-        clickHandler[currentGame](e);
-    }
-    if(e.clientX > 0 && e.clientX < 50) {
-        switchPage(-1);
-    } else if (e.clientX < 1150 && e.clientX > 1100) {
-        switchPage(1);
-        
-    }
-})
-canvas.addEventListener("keydown", /** @param {KeyboardEvent} e */ (e) => {
-    if(currentGame) {
-        keyHandler[currentGame](e);
-    }
+canvas.addEventListener("click", /** @param {MouseEvent} e */(e) => {
+	if (currentGame) {
+		clickHandler[currentGame](e);
+	}
+	if (e.clientX > 0 && e.clientX < 50) {
+		switchPage(-1);
+	} else if (e.clientX < 1150 && e.clientX > 1100) {
+		switchPage(1);
 
-    if(e.key === "ArrowLeft") {
-        switchPage(-1);
-    } else if (e.key === "ArrowRight") {
-        switchPage(1);
-    }
+	}
+})
+canvas.addEventListener("keydown", /** @param {KeyboardEvent} e */(e) => {
+	if (currentGame) {
+		keyHandler[currentGame](e);
+	}
+
+	if (e.key === "ArrowLeft") {
+		switchPage(-1);
+	} else if (e.key === "ArrowRight") {
+		switchPage(1);
+	}
 })
 
 init();
